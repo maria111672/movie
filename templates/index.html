@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mareel - Movie Browser</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand" onclick="navigateTo('home')">
+            <span class="brand-icon">&#127916;</span>
+            <span class="brand-text">Mareel</span>                                              
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-view="home" onclick="navigateTo('home')">Home</a>
+            <a href="#" class="nav-link" data-view="Downloads" onclick="navigateTo('Downloads')">
+                Downloads <span class="fav-count" id="favCount">0</span>
+                
+            </a>
+            
+        </div>
+            
+        <div class="nav-search">
+            <input type="text" id="searchInput" placeholder="Search movies, directors, actors..." autocomplete="off">
+            <button class="search-btn" onclick="performSearch()">&#128269;</button>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="filters" id="filtersSection">
+            <div class="filter-group">
+                <label>Category:</label>
+                <div class="category-chips" id="categoryChips">
+                    <button class="chip active" data-category="" onclick="filterByCategory('')">All</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>Sort by:</label>
+                <select id="sortSelect" onchange="applyFilters()">
+                    <option value="">Default</option>
+                    <option value="rating_desc">Rating (High to Low)</option>
+                    <option value="rating_asc">Rating (Low to High)</option>
+                    <option value="year_desc">Year (Newest)</option>
+                    <option value="year_asc">Year (Oldest)</option>
+                    <option value="title">Title (A-Z)</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="movies-grid" id="moviesGrid"></div>
+
+        <div class="empty-state" id="emptyState" style="display:none;">
+            <span class="empty-icon">&#127916;</span>
+            <h2>No movies found</h2>
+            <p>Try adjusting your search or filters</p>
+        </div>
+
+        <div class="loading" id="loadingSpinner" style="display:none;">
+            <div class="spinner"></div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="movieModal" onclick="closeModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModalDirect()">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>CineVault &copy; 2026 &mdash; Your personal movie browser</p>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
